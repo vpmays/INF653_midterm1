@@ -78,55 +78,55 @@
                 author_id = :author_id,
                 category_id = :category_id';
             */
-
+            
             $query2 = 'SELECT COUNT(*) FROM authors WHERE id = :author_id2';
 
             $stmt2 = $this->conn->prepare($query2);
             $this->author_id = htmlspecialchars(strip_tags($this->author_id));
             $stmt2->bindParam(':author_id2', $this->author_id);
             $stmt2->execute();
-            $author_exists = $stmt2->fetchcolumn();
-            if ($author_exists == 0) {
+            $this->author_exists = $stmt2->fetchcolumn();
+            if ($this->author_exists == 0) {
                 return true;
+            } else {
+                $query3 = 'SELECT COUNT(*) FROM categories WHERE id = :category_id2';
+
+                $stmt3 = $this->conn->prepare($query3);
+                $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+                $stmt3->bindParam(':category_id2', $this->category_id);
+                $stmt3->execute();
+                $this->category_exists = $stmt3->fetchcolumn();
+                if ($this->category_exists == 0) {
+                    return true;
+                } else {
+                
+                    //create query 
+                    $query = 'INSERT INTO ' . $this->table . '(quote, author_id, category_id) OVERRIDING SYSTEM VALUE 
+                    Values(:quote, :author_id, :category_id)';
+
+                    //Prepare Statement
+                    $stmt = $this->conn->prepare($query);
+
+                    //Clean Data
+                    $this->quote = htmlspecialchars(strip_tags($this->quote));
+                    $this->author_id = htmlspecialchars(strip_tags($this->author_id));
+                    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+
+                    //Bind data
+                    $stmt->bindParam(':quote', $this->quote);
+                    $stmt->bindParam(':author_id', $this->author_id);
+                    $stmt->bindParam(':category_id', $this->category_id);
+
+                    //Exicute query
+                    if($stmt->execute()) {
+                        $this->id = $this->conn->lastInsertId();
+                        return true;
+                    } 
+                }
             }
-
-            $query3 = 'SELECT COUNT(*) FROM categories WHERE id = :category_id2';
-
-            $stmt3 = $this->conn->prepare($query3);
-            $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-            $stmt3->bindParam(':category_id2', $this->category_id);
-            $stmt3->execute();
-            $this->category_exists = $stmt3->fetchcolumn();
-            if ($this->category_exists == 0) {
-                return true;
-            }
-
-            //create query 
-            $query = 'INSERT INTO ' . $this->table . '(quote, author_id, category_id) OVERRIDING SYSTEM VALUE 
-            Values(:quote, :author_id, :category_id)';
-
-            //Prepare Statement
-            $stmt = $this->conn->prepare($query);
-
-            //Clean Data
-            $this->quote = htmlspecialchars(strip_tags($this->quote));
-            $this->author_id = htmlspecialchars(strip_tags($this->author_id));
-            $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-
-            //Bind data
-            $stmt->bindParam(':quote', $this->quote);
-            $stmt->bindParam(':author_id', $this->author_id);
-            $stmt->bindParam(':category_id', $this->category_id);
-
-            //Exicute query
-            if($stmt->execute()) {
-                $this->id = $this->conn->lastInsertId();
-                return true;
-            } 
-
             //Print Error if something goes wrong
             printf("Error: %s./n", $stmt->error);
-
+            
             return false;
         }
 
