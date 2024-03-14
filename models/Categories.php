@@ -42,6 +42,12 @@
             //create query 
             $query = 'INSERT INTO ' . $this->table . '(category) OVERRIDING SYSTEM VALUE 
             Values(:category)';
+            /*
+            //create query 
+            $query = 'INSERT INTO ' . $this->table . ' 
+            SET 
+                category = :category';
+            */
 
             //Prepare Statement
             $stmt = $this->conn->prepare($query);

@@ -43,6 +43,13 @@
             //create query 
             $query = 'INSERT INTO ' . $this->table . '(author) OVERRIDING SYSTEM VALUE 
             Values(:author)';
+            /*
+            //create query 
+            $query = 'INSERT INTO ' . $this->table . ' 
+            SET 
+                author = :author';
+
+            */
 
             //Prepare Statement
             $stmt = $this->conn->prepare($query);
