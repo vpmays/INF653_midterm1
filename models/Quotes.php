@@ -9,8 +9,10 @@
         public $quote;
         public $author_id;
         public $author_name;
+        public $author_exists;
         public $category_id;
         public $category_name;
+        public $category_exists;
 
         //Constructor with DB
         public function __construct($db) {
@@ -79,6 +81,29 @@
                 author_id = :author_id,
                 category_id = :category_id';
             */
+
+            $query2 = 'SELECT COUNT(*) FROM authors WHERE id = :author_id2';
+
+            $stmt2 = $this->conn->prepare($query2);
+            $this->author_id = htmlspecialchars(strip_tags($this->author_id));
+            $stmt->bindParam(':author_id2', $this->author_id);
+            $stmt->execute();
+            $author_exists = $stmt->fetchcolumn();
+            if ($author_exists == 0) {
+                return true;
+            }
+
+            $query3 = 'SELECT COUNT(*) FROM categories WHERE id = :category_id2';
+
+            $stmt3 = $this->conn->prepare($query3);
+            $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+            $stmt->bindParam(':category_id3', $this->category_id);
+            $stmt->execute();
+            $this->category_exists = $stmt->fetchcolumn();
+            if ($this->category_exists == 0) {
+                return true;
+            }
+
 
             //Prepare Statement
             $stmt = $this->conn->prepare($query);

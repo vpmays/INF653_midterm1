@@ -36,14 +36,6 @@
             echo json_encode(
                 array('message' => 'Missing Required Parameters') //'Missing Required Parameters'
             );
-        } else if (!$data->author_id) { //!$data->author_id
-            echo json_encode(
-                array('message' => 'author_id Not Found') //'author_id Not Found'
-            );
-        } else if (!$data->category_id) { //!$data->category_id
-            echo json_encode(
-                array('message' => 'category_id Not Found') //'category_id Not Found'
-            );
         } else {
             $quote->quote = $data->quote;
             $quote->author_id = $data->author_id;
@@ -51,13 +43,25 @@
 
             //Create post
             if($quote->create()) {
-                $quote_item = array(
-                    'id' => $quote->id,
-                    'quote' => $data->quote,
-                    'author_id' => $data->author_id,
-                    'category_id' => $data->category_id,
-                );
-                echo json_encode($quote_item);
+
+                if ($quote->author_exists == 0) { //!$data->author_id
+                    echo json_encode(
+                        array('message' => 'author_id Not Found') //'author_id Not Found'
+                    );
+                } else if (!$quote->category_exsits == 0) { //!$data->category_id
+                    echo json_encode(
+                        array('message' => 'category_id Not Found') //'category_id Not Found'
+                    );
+                } else { 
+
+                    $quote_item = array(
+                        'id' => $quote->id,
+                        'quote' => $data->quote,
+                        'author_id' => $data->author_id,
+                        'category_id' => $data->category_id,
+                    );
+                    echo json_encode($quote_item);
+                } 
             } else {
                 echo json_encode(
                     array('message' => 'Quote not created.')
