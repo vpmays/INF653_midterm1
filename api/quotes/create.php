@@ -48,7 +48,7 @@
                     echo json_encode(
                         array('message' => 'author_id Not Found') //'author_id Not Found'
                     );
-                } else if ($quote->category_exsits == 0) { //!$data->category_id
+                } else if ($quote->category_exists == 0) { //!$data->category_id
                     echo json_encode(
                         array('message' => 'category_id Not Found') //'category_id Not Found'
                     );
