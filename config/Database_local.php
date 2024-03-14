@@ -2,15 +2,15 @@
     class Database {
         //DB params
         private $host = 'localhost';
-        private $db_name = 'postgres_0aq4';
-        private $port = '5432';
-        private $username = 'postgres';
-        private $password = 'postgres';
+        private $db_name = 'quotesdb';
+        //private $port = '5432';
+        private $username = 'root';
+        private $password = '';
         private $conn;
 
         public function connect() {
             $this->conn= null;
-            $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->db_name};";
+            $dsn = "mysql:host={$this->host};dbname={$this->db_name}";
 
             try {
                 $this->conn = new PDO($dsn, $this->username, $this->password);

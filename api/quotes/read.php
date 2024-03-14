@@ -4,11 +4,10 @@
         header('Access-Control-Allow-Origin: *');
         header('Content-Type: application/json');
 
-        include_once '../../config/Database.php';
-        //include_once '../../config/Database_local.php';
+        //include_once '../../config/Database.php';
+        include_once '../../config/Database_local.php';
         include_once '../../models/Quotes.php';
-        //include_once 'index.php';
-
+        
         // Instantiate DB & connect 
         $database = new Database();
         $db = $database->connect();

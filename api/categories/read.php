@@ -1,11 +1,11 @@
 <?php
     function read() {
         //Headers
-        header('Access-Control-Allow-Origin: *');
-        header('Content-Type: application/json');
+        //header('Access-Control-Allow-Origin: *');
+        //header('Content-Type: application/json');
 
-        include_once '../../config/Database.php';
-        //include_once '../../config/Database_local.php';
+        //include_once '../../config/Database.php';
+        include_once '../../config/Database_local.php';
         include_once '../../models/Categories.php';
 
         // Instantiate DB & connect 

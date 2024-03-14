@@ -6,8 +6,8 @@
         header('Access-Control-Allow-Methods: POST');
         header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 
-        include_once '../../config/Database.php';
-        //include_once '../../config/Database_local.php';
+        //include_once '../../config/Database.php';
+        include_once '../../config/Database_local.php';
         include_once '../../models/Quotes.php';
 
         // Instantiate DB & connect 
