@@ -40,7 +40,7 @@
         public function create() {
 
             //create query 
-            $query = 'INSERT INTO ' . $this->table . '(category)
+            $query = 'INSERT INTO ' . $this->table . '(category) OVERRIDING SYSTEM VALUE 
             Values(:category)';
 
             //Prepare Statement

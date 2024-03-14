@@ -41,7 +41,7 @@
         public function create() {
 
             //create query 
-            $query = 'INSERT INTO ' . $this->table . '(author)
+            $query = 'INSERT INTO ' . $this->table . '(author) OVERRIDING SYSTEM VALUE 
             Values(:author)';
 
             //Prepare Statement
