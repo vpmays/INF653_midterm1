@@ -40,7 +40,7 @@
             //Create post
             if($quote->create()) {
                 $quote_item = array(
-                    'id' => $$data->id,
+                    'id' => $data->id,
                     'quote' => $data->quote,
                     'author_id' => $data->author_id,
                     'category_id' => $data->category_id,
