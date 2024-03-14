@@ -37,8 +37,8 @@
                 $quote_item = array(
                     'id' => $id,
                     'quote' => $quote,
-                    'author_name' => $author_name,
-                    'category_name' => $category_name,
+                    'author' => $author,
+                    'category' => $category,
                 );
 
                 // Push to 'data'
