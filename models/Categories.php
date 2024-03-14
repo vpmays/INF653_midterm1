@@ -40,8 +40,8 @@
         public function create() {
 
             //create query 
-            $query = 'INSERT INTO ' . $this->table . ' (category)
-            Values (:category)';
+            $query = 'INSERT INTO ' . $this->table . '(category)
+            Values(:category)';
 
             //Prepare Statement
             $stmt = $this->conn->prepare($query);
