@@ -32,7 +32,7 @@
             echo json_encode(
                 array('message' => 'category_id Not Found')
             );*/
-        if (!isset($data->author_id) || !isset($data->quote) || !isset($data->category_id)) { //(!isset($data->author_id) || !isset($data->quote) || !isset($data->category_id))
+        if (!isset($data->author_id) || !$data->author_id || !isset($data->quote) || !$data->quote_id || !isset($data->category_id) || !$data->category_id) { //(!isset($data->author_id) || !isset($data->quote) || !isset($data->category_id))
             echo json_encode(
                 array('message' => 'Missing Required Parameters') //'Missing Required Parameters'
             );
