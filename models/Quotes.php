@@ -8,9 +8,9 @@
         public $id;
         public $quote;
         public $author_id;
-        public $author;
+        public $author_name;
         public $category_id;
-        public $category;
+        public $category_name;
 
         //Constructor with DB
         public function __construct($db) {

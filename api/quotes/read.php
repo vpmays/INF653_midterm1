@@ -26,7 +26,7 @@
         $num = $result->rowCount();
 
         //Check if any quotes
-        if ($num > 0) {
+        if ($num > 1) {
             //quote array
             $quotes_arr = array();
             //$quotes_arr['data'] = array();
@@ -37,8 +37,8 @@
                 $quote_item = array(
                     'id' => $id,
                     'quote' => $quote,
-                    'author' => $author,
-                    'category' => $category,
+                    'author' => $author_name,
+                    'category' => $category_name,
                 );
 
                 // Push to 'data'
@@ -49,6 +49,14 @@
             //Turn to json and output
             echo json_encode($quotes_arr);
 
+        } else if ($num == 1) {
+            $quote_item = array(
+                'id' => $id,
+                'quote' => $quote,
+                'author' => $author_name,
+                'category' => $category_name
+            );
+            echo json_encode($quote_item);
         } else {
             //No quotes
             echo json_encode(
