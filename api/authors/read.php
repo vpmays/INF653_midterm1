@@ -41,9 +41,12 @@
                 array_push($authors_arr, $author_item);
             }
 
-            //Turn to json and output
-            echo json_encode($authors_arr);
-
+            if ($num == 1) {
+                echo json_encode($authors_arr[0]);
+            } else {
+                //Turn to json and output
+                echo json_encode($authors_arr);
+            }
         } else {
             //No authors$authors
             echo json_encode(

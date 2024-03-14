@@ -40,8 +40,12 @@
                 array_push($categories_arr, $category_item);
             }
 
-            //Turn to json and output
-            echo json_encode($categories_arr);
+            if ($num == 1) {
+                echo json_encode($categories_arr[0]);
+            } else {
+                //Turn to json and output
+                echo json_encode($categories_arr);
+            }
 
         } else {
             //No categories
