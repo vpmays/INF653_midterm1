@@ -15,7 +15,7 @@
             $this->password = getenv('PASSWORD');
             $this->db_name = getenv('DBNAME');
             $this->host = getenv('HOST');
-            $this->port = (int) getenv('PORT');
+            $this->port = getenv('PORT');
         }
 
         // DB connectg
@@ -24,7 +24,7 @@
                 return $this->conn;
             } else {
 
-                $dsn = "pgsql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name . ";";
+                $dsn = "pgsql:host=" . $this->host . ";port=" . ((int) $this->port) . ";dbname=" . $this->db_name . ";";
 
                 try {
                     $this->conn = new PDO($dsn, $this->username, $this->password);
