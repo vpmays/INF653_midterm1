@@ -94,7 +94,7 @@
 
             $stmt3 = $this->conn->prepare($query3);
             $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-            $stmt3->bindParam(':category_id3', $this->category_id);
+            $stmt3->bindParam(':category_id2', $this->category_id);
             $stmt3->execute();
             $this->category_exists = $stmt3->fetchcolumn();
             if ($this->category_exists == 0) {
