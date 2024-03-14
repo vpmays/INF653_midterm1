@@ -70,9 +70,6 @@
         //Create post
         public function create() {
             
-            //create query 
-            $query = 'INSERT INTO ' . $this->table . '(quote, author_id, category_id) OVERRIDING SYSTEM VALUE 
-            Values(:quote, :author_id, :category_id)';
             /*
             //create query 
             $query = 'INSERT INTO ' . $this->table . ' 
@@ -88,7 +85,7 @@
             $this->author_id = htmlspecialchars(strip_tags($this->author_id));
             $stmt2->bindParam(':author_id2', $this->author_id);
             $stmt2->execute();
-            $author_exists = $stmt->fetchcolumn();
+            $author_exists = $stmt2->fetchcolumn();
             if ($author_exists == 0) {
                 return true;
             }
@@ -99,11 +96,14 @@
             $this->category_id = htmlspecialchars(strip_tags($this->category_id));
             $stmt3->bindParam(':category_id3', $this->category_id);
             $stmt3->execute();
-            $this->category_exists = $stmt->fetchcolumn();
+            $this->category_exists = $stmt3->fetchcolumn();
             if ($this->category_exists == 0) {
                 return true;
             }
 
+            //create query 
+            $query = 'INSERT INTO ' . $this->table . '(quote, author_id, category_id) OVERRIDING SYSTEM VALUE 
+            Values(:quote, :author_id, :category_id)';
 
             //Prepare Statement
             $stmt = $this->conn->prepare($query);
