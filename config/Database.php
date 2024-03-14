@@ -24,10 +24,10 @@
                 return $this->conn;
             } else {
 
-                $dsn = 'pgsql:host=' . $this->host . ';port=5432;dbname=' . $this->db_name . '';
+                $dsn = 'pgsql:host=XoaGKShplIxXAFGEeCffI8mrgbKkeUuA;port=5432;dbname=postgres1_0aq4';
 
                 try {
-                    $this->conn = new PDO($dsn, $this->username, $this->password);
+                    $this->conn = new PDO($dsn, "vmays", "XoaGKShplIxXAFGEeCffI8mrgbKkeUuA");
                     $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     return $this->conn;
                 } catch(PDOException $e) {
