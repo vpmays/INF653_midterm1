@@ -20,15 +20,15 @@
         //Get raw posted data
         $data = json_decode(file_get_contents("php://input"));
         
-        if (!isset($data->quote)) { //(!isset($data->author_id) || !isset($data->quote) || !isset($data->category_id))
+        if (!isset($data->author_id) || !isset($data->quote) || !isset($data->category_id)) { //(!isset($data->author_id) || !isset($data->quote) || !isset($data->category_id))
             echo json_encode(
                 array('message' => 'Missing Required Parameters')
             );
-        } else if (!isset($data->author_id)) {
+        } else if (!$data->author_id) {
             echo json_encode(
                 array('message' => 'author_id Not Found')
             );
-        } else if (!isset($data->category_id)) {
+        } else if (!$data->category_id) {
             echo json_encode(
                 array('message' => 'category_id Not Found')
             );
