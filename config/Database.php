@@ -24,7 +24,7 @@
                 return $this->conn;
             } else {
 
-                $dsn = 'pgsql:host=XoaGKShplIxXAFGEeCffI8mrgbKkeUuA;port=5432;dbname=postgres1_0aq4';
+                $dsn = 'pgsql:host=dpg-cnn52aicn0vc738h57jg-a;port=5432;dbname=postgres1_0aq4';
 
                 try {
                     $this->conn = new PDO($dsn, "vmays", "XoaGKShplIxXAFGEeCffI8mrgbKkeUuA");
