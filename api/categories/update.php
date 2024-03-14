@@ -37,9 +37,10 @@
             $num = $result->rowCount();
 
             //update category
-            if($num >0) {
+            if($num > 0) {
                 echo json_encode(
-                    array('message' => '' . $category->id . '')
+                    array('id' => $data->id,
+                    'category' => $data->category)
                 );
             } else {
                 echo json_encode(

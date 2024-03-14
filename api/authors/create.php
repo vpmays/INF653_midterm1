@@ -30,7 +30,7 @@
             //Create post
             if($author->create()) {
                 echo json_encode(
-                    array('message' => 'Author created.')
+                    array('id' => $author->id, 'category' => $data->author)
                 );
             } else {
                 echo json_encode(

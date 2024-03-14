@@ -49,7 +49,10 @@
             //Update post
             if($num > 0) {
                 echo json_encode(
-                    array('message' => '' . $quote->id . '')
+                    array('id' => $data->id,
+                    'quote' => $data->quote,
+                    'author_id' => $data->author_id,
+                    'category_id' => $data->category_id)
                 );
             } else {
                 echo json_encode(

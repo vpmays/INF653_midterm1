@@ -22,7 +22,7 @@
 
         if (!isset($data->category)) {
             echo json_encode(
-                array('message' => 'Missing Required Parameters')
+                array('message' => 'Missing Required Parameters', )
             );
         } else {
             $category->category = $data->category;
@@ -30,7 +30,7 @@
             //Create post
             if($category->create()) {
                 echo json_encode(
-                    array('message' => 'Category created.')
+                    array('id' => $category->id, 'category' => $data->category)
                 );
             } else {
                 echo json_encode(

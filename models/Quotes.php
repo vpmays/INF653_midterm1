@@ -70,7 +70,7 @@
             /*
             //create query 
             $query = 'INSERT INTO ' . $this->table . '(quote, author_id, category_id) OVERRIDING SYSTEM VALUE 
-            Values(:quote, :author_id, :category_id) RETURNING id';
+            Values(:quote, :author_id, :category_id)';
             */
             //create query 
             $query = 'INSERT INTO ' . $this->table . ' 

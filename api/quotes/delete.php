@@ -31,7 +31,7 @@
         //delete quote
         if($num > 0) {
             echo json_encode(
-                array('message' => '' . $quote->id . '')
+                array('id' => '' . $quote->id . '')
             );
         } else {
             echo json_encode(

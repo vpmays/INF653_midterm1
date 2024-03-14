@@ -31,7 +31,7 @@
         //delete category
         if($num >0) {
             echo json_encode(
-                array('message' => '' . $author->id . '')
+                array('id' => '' . $author->id . '')
             );
         } else {
             echo json_encode(

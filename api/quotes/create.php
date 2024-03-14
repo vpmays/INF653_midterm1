@@ -45,9 +45,7 @@
                     'author_id' => $data->author_id,
                     'category_id' => $data->category_id,
                 );
-                echo json_encode(
-                    array($quote_item)
-                );
+                echo json_encode($quote_item);
             } else {
                 echo json_encode(
                     array('message' => 'Quote not created.')

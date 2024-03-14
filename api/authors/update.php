@@ -39,7 +39,8 @@
             //Update post
             if($num > 0) {
                 echo json_encode(
-                    array('message' => '' . $author->id . '')
+                    array('id' => $data->id,
+                    'author' => $data->author)
                 );
             } else {
                 echo json_encode(
