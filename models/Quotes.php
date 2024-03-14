@@ -69,11 +69,8 @@
         public function create() {
 
             //create query 
-            $query = 'INSERT INTO ' . $this->table . ' 
-            SET 
-                quote = :quote,
-                author_id = :author_id,
-                category_id = :category_id';
+            $query = 'INSERT INTO ' . $this->table . ' (quote, author_id, category_id)
+            Values (:quote, :author_id, :category_id)';
 
             //Prepare Statement
             $stmt = $this->conn->prepare($query);
