@@ -86,8 +86,8 @@
 
             $stmt2 = $this->conn->prepare($query2);
             $this->author_id = htmlspecialchars(strip_tags($this->author_id));
-            $stmt->bindParam(':author_id2', $this->author_id);
-            $stmt->execute();
+            $stmt2->bindParam(':author_id2', $this->author_id);
+            $stmt2->execute();
             $author_exists = $stmt->fetchcolumn();
             if ($author_exists == 0) {
                 return true;
@@ -97,8 +97,8 @@
 
             $stmt3 = $this->conn->prepare($query3);
             $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-            $stmt->bindParam(':category_id3', $this->category_id);
-            $stmt->execute();
+            $stmt3->bindParam(':category_id3', $this->category_id);
+            $stmt3->execute();
             $this->category_exists = $stmt->fetchcolumn();
             if ($this->category_exists == 0) {
                 return true;

@@ -53,7 +53,6 @@
                         array('message' => 'category_id Not Found') //'category_id Not Found'
                     );
                 } else { 
-
                     $quote_item = array(
                         'id' => $quote->id,
                         'quote' => $data->quote,
