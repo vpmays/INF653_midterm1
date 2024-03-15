@@ -43,7 +43,7 @@
                 );
             } else if ($quote->category_exists == 0) { //!$data->category_id
                 echo json_encode(
-                    array('message' => 'category_id Not Found') //'category_id Not Found'
+                    array('message' => 'category_id Not Found') //'category_id  Not Found'
                 );
             } else {
                 //Get row count
