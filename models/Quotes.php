@@ -133,33 +133,55 @@
         //Update post
         public function update() {
 
-            //create query 
-            $query = 'UPDATE ' . $this->table . ' 
-            SET 
-                quote = :quote,
-                author_id = :author_id,
-                category_id = :category_id
-            WHERE 
-                id= :id';
+            $query2 = 'SELECT COUNT(*) FROM authors WHERE id = :author_id2';
 
-            //Prepare Statement
-            $stmt = $this->conn->prepare($query);
-
-            //Clean Data
-            $this->quote = htmlspecialchars(strip_tags($this->quote));
+            $stmt2 = $this->conn->prepare($query2);
             $this->author_id = htmlspecialchars(strip_tags($this->author_id));
-            $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-            $this->id = htmlspecialchars(strip_tags($this->id));
+            $stmt2->bindParam(':author_id2', $this->author_id);
+            $stmt2->execute();
+            $this->author_exists = $stmt2->fetchcolumn();
+            if ($this->author_exists == 0) {
+                return true;
+            } else {
+                $query3 = 'SELECT COUNT(*) FROM categories WHERE id = :category_id2';
 
-            //Bind data
-            $stmt->bindParam(':quote', $this->quote);
-            $stmt->bindParam(':author_id', $this->author_id);
-            $stmt->bindParam(':category_id', $this->category_id);
-            $stmt->bindParam(':id', $this->id);
+                $stmt3 = $this->conn->prepare($query3);
+                $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+                $stmt3->bindParam(':category_id2', $this->category_id);
+                $stmt3->execute();
+                $this->category_exists = $stmt3->fetchcolumn();
+                if ($this->category_exists == 0) {
+                    return true;
+                } else {
+                    //create query 
+                    $query = 'UPDATE ' . $this->table . ' 
+                    SET 
+                        quote = :quote,
+                        author_id = :author_id,
+                        category_id = :category_id
+                    WHERE 
+                        id= :id';
 
-            //Exicute query
-            if($stmt->execute()) {
-                return $stmt;
+                    //Prepare Statement
+                    $stmt = $this->conn->prepare($query);
+
+                    //Clean Data
+                    $this->quote = htmlspecialchars(strip_tags($this->quote));
+                    $this->author_id = htmlspecialchars(strip_tags($this->author_id));
+                    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+                    $this->id = htmlspecialchars(strip_tags($this->id));
+
+                    //Bind data
+                    $stmt->bindParam(':quote', $this->quote);
+                    $stmt->bindParam(':author_id', $this->author_id);
+                    $stmt->bindParam(':category_id', $this->category_id);
+                    $stmt->bindParam(':id', $this->id);
+
+                    //Exicute query
+                    if($stmt->execute()) {
+                        return $stmt;
+                    }
+                }
             } 
 
             //Print Error if something goes wrong
