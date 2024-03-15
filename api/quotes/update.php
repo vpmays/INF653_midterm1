@@ -36,8 +36,6 @@
 
             //Blog quotes query
             $result = $quote->update();
-            //Get row count
-            $num = $result->rowCount();
 
             if ($quote->author_exists == 0) { //!$data->author_id
                 echo json_encode(
@@ -48,6 +46,8 @@
                     array('message' => 'category_id Not Found') //'category_id Not Found'
                 );
             } else {
+                //Get row count
+                $num = $result->rowCount();
                 //Update post
                 if($num > 0) {
                     echo json_encode(

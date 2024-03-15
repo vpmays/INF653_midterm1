@@ -141,7 +141,7 @@
             $stmt2->execute();
             $this->author_exists = $stmt2->fetchcolumn();
             if ($this->author_exists == 0) {
-                return true;
+                return $stmt2;
             } else {
                 $query3 = 'SELECT COUNT(*) FROM categories WHERE id = :category_id2';
 
@@ -151,7 +151,7 @@
                 $stmt3->execute();
                 $this->category_exists = $stmt3->fetchcolumn();
                 if ($this->category_exists == 0) {
-                    return true;
+                    return $stmt3;
                 } else {
                     //create query 
                     $query = 'UPDATE ' . $this->table . ' 
@@ -186,7 +186,7 @@
 
             //Print Error if something goes wrong
             printf("Error: %s./n", $stmt->error);
-
+            
             return false;
         }
 
