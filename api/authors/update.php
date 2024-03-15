@@ -14,13 +14,13 @@
         $database = new Database();
         $db = $database->connect();
 
-        //Instantiate blog post obj
+        //Instantiate blog author obj
         $author = new Authors($db);
 
         //Get raw posted data
         $data = json_decode(file_get_contents("php://input"));
 
-        if (!isset($data->author)) {
+        if (!isset($data->author)) { //check that author is in given json data
             echo json_encode(
                 array('message' => 'Missing Required Parameters')
             );
@@ -31,7 +31,7 @@
             //Set other properties
             $author->author = $data->author;
 
-            //Blog quotes query
+            //Blog authors query
             $result = $author->update();
             //Get row count
             $num = $result->rowCount();

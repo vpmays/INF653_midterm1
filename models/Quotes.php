@@ -19,10 +19,11 @@
             $this->conn = $db;
         }
 
-        //Get Posts
+        //Get quotes
         public function read() {
             
-            if (($this->author_id) && ($this->category_id)) {
+            //use if/else if/ else to determine which query to run on db
+            if (($this->author_id) && ($this->category_id)) { 
             //Create query
                 $query = 'SELECT a.author AS author_name, c.category AS category_name, q.id, q.quote 
                 FROM ' . $this->table . ' q LEFT JOIN authors a ON q.author_id=a.id LEFT JOIN categories c ON q.category_id=c.id WHERE q.author_id = ? AND q.category_id = ? ORDER BY q.id ASC';
@@ -67,18 +68,10 @@
             return $stmt;
         }
 
-        //Create post
+        //Create quote
         public function create() {
             
-            /*
-            //create query 
-            $query = 'INSERT INTO ' . $this->table . ' 
-            SET 
-                quote = :quote,
-                author_id = :author_id,
-                category_id = :category_id';
-            */
-            
+            //check if author exists
             $query2 = 'SELECT COUNT(*) FROM authors WHERE id = :author_id2';
 
             $stmt2 = $this->conn->prepare($query2);
@@ -86,9 +79,10 @@
             $stmt2->bindParam(':author_id2', $this->author_id);
             $stmt2->execute();
             $this->author_exists = $stmt2->fetchcolumn();
-            if ($this->author_exists == 0) {
+            if ($this->author_exists == 0) { //if author does not exist, return true (will be handled in create.php)
                 return true;
-            } else {
+            } else { 
+                //check if category exists
                 $query3 = 'SELECT COUNT(*) FROM categories WHERE id = :category_id2';
 
                 $stmt3 = $this->conn->prepare($query3);
@@ -96,9 +90,9 @@
                 $stmt3->bindParam(':category_id2', $this->category_id);
                 $stmt3->execute();
                 $this->category_exists = $stmt3->fetchcolumn();
-                if ($this->category_exists == 0) {
+                if ($this->category_exists == 0) { //if category does not exist, return true (will be handled in create.php)
                     return true;
-                } else {
+                } else { //author and category exist, so you can create new quote
                 
                     //create query 
                     $query = 'INSERT INTO ' . $this->table . '(quote, author_id, category_id) OVERRIDING SYSTEM VALUE 
@@ -130,9 +124,10 @@
             return false;
         }
 
-        //Update post
+        //Update quote
         public function update() {
 
+            //check if author exists
             $query2 = 'SELECT COUNT(*) FROM authors WHERE id = :author_id2';
 
             $stmt2 = $this->conn->prepare($query2);
@@ -140,9 +135,10 @@
             $stmt2->bindParam(':author_id2', $this->author_id);
             $stmt2->execute();
             $this->author_exists = $stmt2->fetchcolumn();
-            if ($this->author_exists == 0) {
+            if ($this->author_exists == 0) { //if author does not exist, return true (will be handled in update.php)
                 return $stmt2;
             } else {
+                //check if category exists
                 $query3 = 'SELECT COUNT(*) FROM categories WHERE id = :category_id2';
 
                 $stmt3 = $this->conn->prepare($query3);
@@ -150,9 +146,9 @@
                 $stmt3->bindParam(':category_id2', $this->category_id);
                 $stmt3->execute();
                 $this->category_exists = $stmt3->fetchcolumn();
-                if ($this->category_exists == 0) {
+                if ($this->category_exists == 0) { //if category does not exist, return true (will be handled in update.php)
                     return $stmt3;
-                } else {
+                } else { //author and category exist, so you can update quote
                     //create query 
                     $query = 'UPDATE ' . $this->table . ' 
                     SET 
@@ -190,7 +186,7 @@
             return false;
         }
 
-        //Delete Post
+        //Delete quote
         public function delete() {
 
             //Creagte query

@@ -20,14 +20,14 @@
         //Get raw posted data
         $data = json_decode(file_get_contents("php://input"));
 
-        if (!isset($data->category)) {
+        if (!isset($data->category)) { //check that category exists in given json
             echo json_encode(
                 array('message' => 'Missing Required Parameters', )
             );
-        } else {
+        } else { 
             $category->category = $data->category;
 
-            //Create post
+            //Create category
             if($category->create()) {
                 echo json_encode(
                     array('id' => $category->id, 'category' => $data->category)

@@ -18,7 +18,7 @@
         $authors->id = isset($_GET['id']) ? $_GET['id'] : null;
         
 
-        //Blog categories query
+        //Blog authors query
         $result = $authors->read();
         //Get row count
         $num = $result->rowCount();
@@ -27,8 +27,8 @@
         if ($num > 0) {
             //author array
             $authors_arr = array();
-            $authors_arr = array();
 
+            //loop through results and add authors to array
             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
 
@@ -37,11 +37,10 @@
                     'author' => $author,
                 );
 
-                // Push to 'data'
                 array_push($authors_arr, $author_item);
             }
 
-            if ($num == 1) {
+            if ($num == 1) { //if only one author, return that author data not in array
                 echo json_encode($authors_arr[0]);
             } else {
                 //Turn to json and output

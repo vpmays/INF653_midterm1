@@ -14,7 +14,7 @@
         $database = new Database();
         $db = $database->connect();
 
-        //Instantiate blog post obj
+        //Instantiate blog author obj
         $author = new Authors($db);
 
         //Get raw data
@@ -23,7 +23,7 @@
         //Set id to update
         $author->id = $data->id;
 
-        //Blog quotes query
+        //Blog authors query
         $result = $author->delete();
         //Get row count
         $num = $result->rowCount();

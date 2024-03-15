@@ -4,7 +4,7 @@
         private $conn;
         private $table = 'categories';
 
-        //Post Properties
+        //author Properties
         public $id;
         public $category;
 
@@ -13,7 +13,7 @@
             $this->conn = $db;
         }
 
-        //Get Posts
+        //Get authors
         public function read() {
             if ($this->id) {
                 //Create query
@@ -36,19 +36,13 @@
             return $stmt;
         }
 
-        //Create post
+        //Create author
         public function create() {
             
             //create query 
             $query = 'INSERT INTO ' . $this->table . '(category) OVERRIDING SYSTEM VALUE 
             Values(:category)';
-            /*
-            //create query 
-            $query = 'INSERT INTO ' . $this->table . ' 
-            SET 
-                category = :category';
-            */
-
+            
             //Prepare Statement
             $stmt = $this->conn->prepare($query);
 
@@ -70,7 +64,7 @@
             return false;
         }
 
-        //Update post
+        //Update author
         public function update() {
 
             //create query 
@@ -102,7 +96,7 @@
             return false;
         }
 
-        //Delete Post
+        //Delete author
         public function delete() {
 
             //Creagte query

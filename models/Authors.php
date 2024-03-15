@@ -4,7 +4,7 @@
         private $conn;
         private $table = 'authors';
 
-        //Post Properties
+        //Author Properties
         public $id;
         public $author;
 
@@ -13,7 +13,7 @@
             $this->conn = $db;
         }
 
-        //Get Posts
+        //Get Authors
         public function read() {
 
             if ($this->id) {
@@ -37,19 +37,12 @@
             return $stmt;
         }
 
-        //Create post
+        //Create author
         public function create() {
             
             //create query 
             $query = 'INSERT INTO ' . $this->table . '(author) OVERRIDING SYSTEM VALUE 
-            Values(:author)';
-            /*
-            //create query 
-            $query = 'INSERT INTO ' . $this->table . ' 
-            SET 
-                author = :author';
-            */
-            
+            Values(:author)';            
 
             //Prepare Statement
             $stmt = $this->conn->prepare($query);
@@ -72,7 +65,7 @@
             return false;
         }
 
-        //Update post
+        //Update author
         public function update() {
 
             //create query 
@@ -104,7 +97,7 @@
             return false;
         }
 
-        //Delete Post
+        //Delete author
         public function delete() {
 
             //Creagte query

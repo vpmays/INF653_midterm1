@@ -19,19 +19,8 @@
 
         //Get raw posted data
         $data = json_decode(file_get_contents("php://input"));
-        /*
-        if (!isset($data->author_id) || !isset($data->quote) || !isset($data->category_id)) { //(!isset($data->author_id) || !isset($data->quote) || !isset($data->category_id))
-            echo json_encode(
-                array('message' => 'Missing Required Parameters')
-            );
-        } else if (!$data->author_id) {
-            echo json_encode(
-                array('message' => 'author_id Not Found')
-            );
-        } else if (!$data->category_id) {
-            echo json_encode(
-                array('message' => 'category_id Not Found')
-            );*/
+        
+        //check that all need data is there in given json
         if (!isset($data->author_id) || !$data->author_id || !isset($data->quote) || !$data->quote || !isset($data->category_id) || !$data->category_id) { //(!isset($data->author_id) || !isset($data->quote) || !isset($data->category_id))
             echo json_encode(
                 array('message' => 'Missing Required Parameters') //'Missing Required Parameters'
@@ -44,15 +33,15 @@
             //Create post
             if($quote->create()) {
 
-                if ($quote->author_exists == 0) { //!$data->author_id
+                if ($quote->author_exists == 0) { //check if author exists
                     echo json_encode(
-                        array('message' => 'author_id Not Found') //'author_id Not Found'
+                        array('message' => 'author_id Not Found') 
                     );
-                } else if ($quote->category_exists == 0) { //!$data->category_id
+                } else if ($quote->category_exists == 0) { //check if category exists
                     echo json_encode(
-                        array('message' => 'category_id Not Found') //'category_id Not Found'
+                        array('message' => 'category_id Not Found') 
                     );
-                } else { 
+                } else { //
                     $quote_item = array(
                         'id' => $quote->id,
                         'quote' => $data->quote,
@@ -61,7 +50,7 @@
                     );
                     echo json_encode($quote_item);
                 } 
-            } else {
+            } else { //if $quote->create() didn't pass, return quote not created
                 echo json_encode(
                     array('message' => 'Quote not created.')
                 );

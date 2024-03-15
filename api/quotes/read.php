@@ -29,9 +29,9 @@
         if ($num > 0) {
             //quote array
             $quotes_arr = array();
-            //$quotes_arr['data'] = array();
-
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            
+            //loop through array and create json to return
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)) { 
                 extract($row);
 
                 $quote_item = array(
@@ -41,13 +41,12 @@
                     'category' => $category_name,
                 );
 
-                // Push to 'data'
-                //array_push($quotes_arr['data'], $quote_item);
                 array_push($quotes_arr, $quote_item);
             }
-            if ($num == 1) {
+
+            if ($num == 1) { //if only one quote return, return single quote but not iside of an array
                 echo json_encode($quotes_arr[0]);
-            } else {
+            } else { //if more than one quote, return json of array of quotes
                 //Turn to json and output
                 echo json_encode($quotes_arr);
             }

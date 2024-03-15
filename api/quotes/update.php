@@ -14,7 +14,7 @@
         $database = new Database();
         $db = $database->connect();
 
-        //Instantiate blog post obj
+        //Instantiate blog quote obj
         $quote = new Quotes($db);
 
         //Get raw posted data
@@ -37,26 +37,26 @@
             //Blog quotes query
             $result = $quote->update();
 
-            if ($quote->author_exists == 0) { //!$data->author_id
+            if ($quote->author_exists == 0) { //check if author exists
                 echo json_encode(
-                    array('message' => 'author_id Not Found') //'author_id Not Found'
+                    array('message' => 'author_id Not Found') 
                 );
-            } else if ($quote->category_exists == 0) { //!$data->category_id
+            } else if ($quote->category_exists == 0) { //check if category exists
                 echo json_encode(
-                    array('message' => 'category_id Not Found') //'category_id  Not Found'
+                    array('message' => 'category_id Not Found') 
                 );
-            } else {
+            } else { //check if quote was found and updated
                 //Get row count
                 $num = $result->rowCount();
                 //Update post
-                if($num > 0) {
+                if($num > 0) { //quote was updated since at least 1 row, so print updates
                     echo json_encode(
                         array('id' => $data->id,
                         'quote' => $data->quote,
                         'author_id' => $data->author_id,
                         'category_id' => $data->category_id)
                     );
-                } else {
+                } else { //no quote found to update
                     echo json_encode(
                         array('message' => 'No Quotes Found')
                     );

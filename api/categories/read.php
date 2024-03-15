@@ -26,8 +26,8 @@
         if ($num > 0) {
             //category array
             $categories_arr = array();
-            //$categories_arr['data'] = array();
-
+            
+            //create json array of categories
             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);
 
@@ -40,7 +40,7 @@
                 array_push($categories_arr, $category_item);
             }
 
-            if ($num == 1) {
+            if ($num == 1) { //if only 1 category found, return category not in array
                 echo json_encode($categories_arr[0]);
             } else {
                 //Turn to json and output

@@ -14,7 +14,7 @@
         $database = new Database();
         $db = $database->connect();
 
-        //Instantiate blog post obj
+        //Instantiate blog category obj
         $category = new Categories($db);
 
         //Get raw posted data
@@ -31,7 +31,7 @@
             //Set other properties
             $category->category = $data->category;
 
-            //Blog quotes query
+            //Blog categories query
             $result = $category->update();
             //Get row count
             $num = $result->rowCount();

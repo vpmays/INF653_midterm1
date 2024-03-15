@@ -7,7 +7,7 @@
         header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
         header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
         exit();
-    } else if ($method == 'GET') {
+    } else if ($method == 'GET') { //call appropriate read, create, update, or delete functions from respective .php files
         include_once 'read.php';
         read();
         exit;
